@@ -92,10 +92,15 @@ metadata:
       ]
     capabilities: Basic Install
     categories: Database
-    description: The MongoDB Atlas Kubernetes Operator enables easy management of Clusters in MongoDB Atlas
-    operators.operatorframework.io/builder: operator-sdk-v1.7.1+git
+    description: The MongoDB Atlas Kubernetes Operator enables easy management of
+      Clusters in MongoDB Atlas
+    operators.operatorframework.io/builder: operator-sdk-v1.10.0+git
     operators.operatorframework.io/project_layout: go.kubebuilder.io/v3
+<<<<<<< HEAD
   name: mongodb-atlas-kubernetes.v0.7.0
+=======
+  name: mongodb-atlas-kubernetes.v0.1.0
+>>>>>>> dbaas bundle build
   namespace: placeholder
 spec:
   apiservicedefinitions: {}
@@ -116,12 +121,14 @@ spec:
       kind: AtlasProject
       name: atlasprojects.atlas.mongodb.com
       version: v1
-    - description: MongoDBAtlasConnection is the Schema for the MongoDBAtlasConnections API
+    - description: MongoDBAtlasConnection is the Schema for the MongoDBAtlasConnections
+        API
       displayName: Mongo DBAtlas Connection
       kind: MongoDBAtlasConnection
       name: mongodbatlasconnections.dbaas.redhat.com
       version: v1alpha1
-    - description: MongoDBAtlasInventory is the Schema for the MongoDBAtlasInventory API
+    - description: MongoDBAtlasInventory is the Schema for the MongoDBAtlasInventory
+        API
       displayName: Mongo DBAtlas Inventory
       kind: MongoDBAtlasInventory
       name: mongodbatlasinventories.dbaas.redhat.com
@@ -442,7 +449,11 @@ spec:
                   valueFrom:
                     fieldRef:
                       fieldPath: metadata.namespace
+<<<<<<< HEAD
                 image: registry.connect.redhat.com/mongodb/mongodb-atlas-kubernetes-operator:0.7.0
+=======
+                image: quay.io/mongodb/mongodb-atlas-kubernetes-dbaas:0.1.0
+>>>>>>> dbaas bundle build
                 imagePullPolicy: Always
                 livenessProbe:
                   httpGet:
@@ -517,5 +528,9 @@ spec:
   maturity: beta
   provider:
     name: MongoDB, Inc
+<<<<<<< HEAD
   version: 0.7.0
   replaces: mongodb-atlas-kubernetes.v0.6.1
+=======
+  version: 0.1.0
+>>>>>>> dbaas bundle build

@@ -1,4 +1,6 @@
 FROM scratch
+
+# RH OLM annotations
 LABEL com.redhat.openshift.versions="v4.5-v4.8"
 LABEL com.redhat.delivery.backport=true
 LABEL com.redhat.delivery.operator.bundle=true
@@ -10,7 +12,7 @@ LABEL operators.operatorframework.io.bundle.metadata.v1=metadata/
 LABEL operators.operatorframework.io.bundle.package.v1=mongodb-atlas-kubernetes
 LABEL operators.operatorframework.io.bundle.channels.v1=beta
 LABEL operators.operatorframework.io.bundle.channel.default.v1=beta
-LABEL operators.operatorframework.io.metrics.builder=operator-sdk-v1.7.1+git
+LABEL operators.operatorframework.io.metrics.builder=operator-sdk-v1.10.0+git
 LABEL operators.operatorframework.io.metrics.mediatype.v1=metrics+v1
 LABEL operators.operatorframework.io.metrics.project_layout=go.kubebuilder.io/v3
 
