@@ -8,11 +8,14 @@ require (
 	github.com/Azure/go-autorest/autorest/azure/auth v0.5.10
 	github.com/Azure/go-autorest/autorest/to v0.4.0
 	github.com/Azure/go-autorest/autorest/validation v0.3.1 // indirect
+	github.com/RHEcosystemAppEng/dbaas-operator v1.0.0
 	github.com/aws/aws-sdk-go v1.42.25
 	github.com/fatih/structtag v1.2.0
+	github.com/fgrosse/zaptest v1.1.0
 	github.com/go-logr/zapr v1.2.0
 	github.com/golang/snappy v0.0.2 // indirect
 	github.com/google/go-cmp v0.5.6
+	github.com/gorilla/mux v1.8.0
 	github.com/mongodb-forks/digest v1.0.3
 	github.com/mxschmitt/playwright-go v0.1400.0
 	github.com/onsi/ginkgo v1.16.5
@@ -24,11 +27,11 @@ require (
 	go.mongodb.org/mongo-driver v1.7.4
 	go.uber.org/zap v1.19.1
 	gopkg.in/yaml.v3 v3.0.0-20210107192922-496545a6307b
-	github.com/RHEcosystemAppEng/dbaas-operator v1.0.0
 	k8s.io/api v0.23.0
 	k8s.io/apimachinery v0.23.0
 	k8s.io/client-go v0.23.0
+	k8s.io/utils v0.0.0-20210930125809-cb0fa318a74b
 	sigs.k8s.io/controller-runtime v0.11.0
 )
 
-replace github.com/RHEcosystemAppEng/dbaas-operator v1.0.0 => github.com/RHEcosystemAppEng/dbaas-operator v1.0.1-0.20210728155403-fcf7cfba855c
+replace github.com/RHEcosystemAppEng/dbaas-operator v1.0.0 => github.com/RHEcosystemAppEng/dbaas-operator v0.1.4-0.20220119182017-47ff2e6c4905

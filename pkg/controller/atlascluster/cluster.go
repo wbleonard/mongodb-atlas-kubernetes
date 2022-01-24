@@ -83,8 +83,11 @@ func (r *AtlasClusterReconciler) ensureClusterState(ctx *workflow.Context, proje
 	case "UPDATING", "REPAIRING":
 		return atlasCluster, workflow.InProgress(workflow.ClusterUpdating, "cluster is updating")
 
-	// TODO: add "DELETING", "DELETED", handle 404 on delete
+	case "DELETING":
+		return atlasCluster, workflow.InProgress(workflow.ClusterDeleting, "cluster is being deleted")
 
+	case "DELETED":
+		return atlasCluster, workflow.InProgress(workflow.ClusterDeleted, "cluster has been deleted")
 	default:
 		return atlasCluster, workflow.Terminate(workflow.Internal, fmt.Sprintf("unknown cluster state %q", atlasCluster.StateName))
 	}

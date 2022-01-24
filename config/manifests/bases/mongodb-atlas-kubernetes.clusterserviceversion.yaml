@@ -34,6 +34,12 @@ spec:
       kind: MongoDBAtlasConnection
       name: mongodbatlasconnections.dbaas.redhat.com
       version: v1alpha1
+    - description: MongoDBAtlasInstance is the Schema for the MongoDBAtlasInstance
+        API
+      displayName: Mongo DBAtlas Instance
+      kind: MongoDBAtlasInstance
+      name: mongodbatlasinstances.dbaas.redhat.com
+      version: v1alpha1
     - description: MongoDBAtlasInventory is the Schema for the MongoDBAtlasInventory
         API
       displayName: Mongo DBAtlas Inventory

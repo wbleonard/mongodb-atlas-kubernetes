@@ -78,6 +78,26 @@ metadata:
         },
         {
           "apiVersion": "dbaas.redhat.com/v1alpha1",
+          "kind": "MongoDBAtlasInstance",
+          "metadata": {
+            "name": "test-instance"
+          },
+          "spec": {
+            "cloudProvider": "aws",
+            "cloudRegion": "US_EAST_1",
+            "inventoryRef": {
+              "name": "test-inventory",
+              "namespace": "mongodb-atlas-system"
+            },
+            "name": "my-cluster-free",
+            "otherInstanceParams": {
+              "instanceSizeName": "M0",
+              "projectName": "my-atlas-project-free"
+            }
+          }
+        },
+        {
+          "apiVersion": "dbaas.redhat.com/v1alpha1",
           "kind": "MongoDBAtlasInventory",
           "metadata": {
             "name": "test-inventory"
@@ -96,11 +116,7 @@ metadata:
       Clusters in MongoDB Atlas
     operators.operatorframework.io/builder: operator-sdk-v1.10.0+git
     operators.operatorframework.io/project_layout: go.kubebuilder.io/v3
-<<<<<<< HEAD
   name: mongodb-atlas-kubernetes.v0.7.0
-=======
-  name: mongodb-atlas-kubernetes.v0.1.0
->>>>>>> dbaas bundle build
   namespace: placeholder
 spec:
   apiservicedefinitions: {}
@@ -126,6 +142,12 @@ spec:
       displayName: Mongo DBAtlas Connection
       kind: MongoDBAtlasConnection
       name: mongodbatlasconnections.dbaas.redhat.com
+      version: v1alpha1
+    - description: MongoDBAtlasInstance is the Schema for the MongoDBAtlasInstance
+        API
+      displayName: Mongo DBAtlas Instance
+      kind: MongoDBAtlasInstance
+      name: mongodbatlasinstances.dbaas.redhat.com
       version: v1alpha1
     - description: MongoDBAtlasInventory is the Schema for the MongoDBAtlasInventory
         API
@@ -385,6 +407,26 @@ spec:
         - apiGroups:
           - dbaas.redhat.com
           resources:
+          - mongodbatlasinstances
+          verbs:
+          - create
+          - delete
+          - get
+          - list
+          - patch
+          - update
+          - watch
+        - apiGroups:
+          - dbaas.redhat.com
+          resources:
+          - mongodbatlasinstances/status
+          verbs:
+          - get
+          - patch
+          - update
+        - apiGroups:
+          - dbaas.redhat.com
+          resources:
           - mongodbatlasinventories
           verbs:
           - create
@@ -402,18 +444,6 @@ spec:
           - get
           - patch
           - update
-        - apiGroups:
-          - authentication.k8s.io
-          resources:
-          - tokenreviews
-          verbs:
-          - create
-        - apiGroups:
-          - authorization.k8s.io
-          resources:
-          - subjectaccessreviews
-          verbs:
-          - create
         serviceAccountName: mongodb-atlas-operator
       deployments:
       - name: mongodb-atlas-operator
@@ -449,11 +479,9 @@ spec:
                   valueFrom:
                     fieldRef:
                       fieldPath: metadata.namespace
-<<<<<<< HEAD
+                - name: SYNC_PERIOD_MIN
+                  value: "180"
                 image: registry.connect.redhat.com/mongodb/mongodb-atlas-kubernetes-operator:0.7.0
-=======
-                image: quay.io/mongodb/mongodb-atlas-kubernetes-dbaas:0.1.0
->>>>>>> dbaas bundle build
                 imagePullPolicy: Always
                 livenessProbe:
                   httpGet:
@@ -528,9 +556,4 @@ spec:
   maturity: beta
   provider:
     name: MongoDB, Inc
-<<<<<<< HEAD
   version: 0.7.0
-  replaces: mongodb-atlas-kubernetes.v0.6.1
-=======
-  version: 0.1.0
->>>>>>> dbaas bundle build
