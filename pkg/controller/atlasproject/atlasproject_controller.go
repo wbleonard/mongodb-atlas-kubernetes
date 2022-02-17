@@ -91,6 +91,9 @@ func (r *AtlasProjectReconciler) Reconcile(context context.Context, req ctrl.Req
 
 	connection, err := atlas.ReadConnection(log, r.Client, r.GlobalAPISecret, project.ConnectionSecretObjectKey())
 	if err != nil {
+		if !project.GetDeletionTimestamp().IsZero() && isDeletionFinalizerPresent(project) {
+			_ = r.removeDeletionFinalizer(context, project)
+		}
 		result = workflow.Terminate(workflow.AtlasCredentialsNotProvided, err.Error())
 		ctx.SetConditionFromResult(status.ProjectReadyType, result)
 		return result.ReconcileResult(), nil
