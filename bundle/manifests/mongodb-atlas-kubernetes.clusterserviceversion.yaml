@@ -114,9 +114,9 @@ metadata:
     categories: Database
     description: The MongoDB Atlas Kubernetes Operator enables easy management of
       Clusters in MongoDB Atlas
-    operators.operatorframework.io/builder: operator-sdk-v1.10.0+git
+    operators.operatorframework.io/builder: operator-sdk-v1.15.0
     operators.operatorframework.io/project_layout: go.kubebuilder.io/v3
-  name: mongodb-atlas-kubernetes.v0.7.0
+  name: mongodb-atlas-kubernetes.v0.2.0
   namespace: placeholder
 spec:
   apiservicedefinitions: {}
@@ -481,7 +481,7 @@ spec:
                       fieldPath: metadata.namespace
                 - name: SYNC_PERIOD_MIN
                   value: "180"
-                image: registry.connect.redhat.com/mongodb/mongodb-atlas-kubernetes-operator:0.7.0
+                image: quay.io/mongodb/mongodb-atlas-kubernetes-dbaas:0.2.0
                 imagePullPolicy: Always
                 livenessProbe:
                   httpGet:
@@ -556,4 +556,4 @@ spec:
   maturity: beta
   provider:
     name: MongoDB, Inc
-  version: 0.7.0
+  version: 0.2.0

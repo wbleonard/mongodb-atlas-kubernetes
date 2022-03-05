@@ -6,7 +6,7 @@ SHELL := /usr/bin/env bash
 # To re-generate a bundle for another specific version without changing the standard setup, you can:
 # - use the VERSION as arg of the bundle target (e.g make bundle VERSION=0.0.2)
 # - use environment variables to overwrite this value (e.g export VERSION=0.0.2)
-VERSION ?= 0.5.0
+VERSION ?= 0.2.0
 
 # CHANNELS define the bundle channels used in the bundle.
 # Add a new line here if you would like to change its default config. (E.g CHANNELS = "preview,fast,stable")
@@ -30,14 +30,17 @@ endif
 BUNDLE_METADATA_OPTS ?= $(BUNDLE_CHANNELS) $(BUNDLE_DEFAULT_CHANNEL)
 
 # Image URL to use all building/pushing image targets
-IMG ?= controller
+IMG ?= quay.io/mongodb/mongodb-atlas-kubernetes-dbaas
 IMGVERSION ?= $(IMG):$(VERSION)
+# IMGVERSION ?= $(IMG):latest
 
 # BUNDLE_IMG defines the image:tag used for the bundle.
 BUNDLE_IMG ?= $(IMG)-bundle:$(VERSION)
+# BUNDLE_IMG ?= $(IMG)-bundle:latest
 
 # The image tag given to the resulting catalog image (e.g. make catalog-build CATALOG_IMG=example.com/operator-catalog:0.2.0).
-CATALOG_IMG ?= $(IMG)-catalog:latest
+CATALOG_IMG ?= $(IMG)-catalog:$(VERSION)
+# CATALOG_IMG ?= $(IMG)-catalog:latest
 
 # Get the currently used golang install path (in GOPATH/bin, unless GOBIN is set)
 ifeq (,$(shell go env GOBIN))
@@ -147,14 +150,13 @@ bundle: manifests kustomize ## Generate bundle manifests and metadata, update se
 	operator-sdk generate kustomize manifests -q --apis-dir=pkg/api
 	cd config/manager && $(KUSTOMIZE) edit set image controller=$(IMGVERSION)
 	$(KUSTOMIZE) build --load-restrictor LoadRestrictionsNone config/manifests | operator-sdk generate bundle -q --overwrite --manifests --version $(VERSION) $(BUNDLE_METADATA_OPTS)
-	operator-sdk bundle validate ./bundle
 
 .PHONY: bundle-build
 bundle-build: ## Build the bundle image.
 	docker build -f bundle.Dockerfile -t $(BUNDLE_IMG) .
 
 .PHONY: bundle-push
-bundle-push: ## Push the bundle image.
+bundle-push: ## Push the bundle image.dd
 	docker push $(BUNDLE_IMG)
 
 docker-build: ## Build the docker image
